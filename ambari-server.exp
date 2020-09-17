@@ -1,0 +1,59 @@
+#!/usr/bin/expect
+
+set timeout 10
+
+spawn ambari-server setup
+
+expect "Customize user account for ambari-server daemon [y/n] (n)?"
+
+send "n\r"
+
+expect "Enter choice (1)"
+
+send "1\r"
+
+expect "Do you accept the Oracle Binary Code License Agreement [y/n] (y)?"
+
+send "y\r"
+
+expect "Enable Ambari Server to download and install GPL Licensed LZO packages [y/n] (n)?"
+
+send "y\r"
+
+expect "Enter advanced database configuration [y/n] (n)?"
+
+send "y\r"
+
+expect "Enter choice (1)"
+
+send "3\r"
+
+expect "Hostname (localhost)"
+
+send "\r"
+
+expect "Port (3306)"
+
+send "\r"
+
+expect "Database name (ambari)"
+
+send "\r"
+
+expect "Username (ambari)"
+
+send "\r"
+
+expect "Enter Database Password (bigdata)"
+
+send "\r"
+
+expect "Should ambari use existing default jdbc"
+
+send "y\r"
+
+expect "Proceed with configuring remote database connection properties [y/n] (y)?"
+
+send "y\r"
+
+interact

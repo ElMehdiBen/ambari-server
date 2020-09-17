@@ -1,6 +1,9 @@
 FROM centos:7.6.1810
-WORKDIR /
+
 RUN yum update -y
+
+COPY ./ambari-server.exp ./ambari-server.exp
+WORKDIR /
 #RUN yum install -y ntp
 #RUN systemctl enable ntpd
 #RUN systemctl disable firewalld
@@ -12,8 +15,8 @@ RUN yum install wget -y
 RUN wget -nv http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.4.0/ambari.repo -O /etc/yum.repos.d/ambari.repo
 RUN yum clean all
 RUN yum install ambari-server -y
-RUN ambari-server setup -s
 RUN yum install mysql-connector-java -y
-RUN ambari-server setup --jdbc-db=mysql --jdbc-driver=/usr/share/java/mysql-connector-java.jar
+RUN yum install expect -y
+RUN expect ambari-server.exp
 EXPOSE 8080
 CMD ambari-server start
